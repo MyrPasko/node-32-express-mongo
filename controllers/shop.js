@@ -16,6 +16,7 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getProduct = (req, res, next) => {
+
     const prodId = req.params.productId;
     // Product.findAll({ where: { id: prodId } })
     //   .then(products => {
