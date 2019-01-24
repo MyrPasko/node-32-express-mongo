@@ -12,22 +12,21 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-
 const mongoConnect = require('./util/database').mongoConnect;
+const User = require('./models/user');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {  // It's just middleware for incoming requests
-    // User.findById(1)
-    //     .then((user) => {
-    //         req.user = user;
-    //         next();
-    //     })
-    //     .catch((err) => {
-    //         console.log("Error from app middleware: ", err);
-    //     });
-    next();
+    User.findById(1)
+        .then((user) => {
+            req.user = user;
+            next();
+        })
+        .catch((err) => {
+            console.log("Error from app middleware: ", err);
+        });
 });
 
 

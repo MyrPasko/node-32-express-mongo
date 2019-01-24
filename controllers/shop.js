@@ -77,7 +77,7 @@ exports.postCart = (req, res, next) => {
             }
 
             if (product) {
-                console.log("PRODUCT", product);
+                // console.log("PRODUCT", product);
 
                 const oldQuantity = product.cartItem.quantity;
                 newQuantity = oldQuantity + 1;
@@ -144,7 +144,7 @@ exports.getOrders = (req, res, next) => {
     req.user
         .getOrders({include: ['products']})
         .then((orders) => {
-            console.log("Orders: ", orders);
+            // console.log("Orders: ", orders);
             res.render('shop/orders', {
                 path: '/orders',
                 pageTitle: 'Your Orders',
