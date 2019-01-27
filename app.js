@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {  // It's just middleware for incoming requests
-    User.findById(1)
+    User.findById("5c4d5022627ec50428b9ad7e")
         .then((user) => {
             req.user = user;
             next();
@@ -28,7 +28,6 @@ app.use((req, res, next) => {  // It's just middleware for incoming requests
             console.log("Error from app middleware: ", err);
         });
 });
-
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
