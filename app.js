@@ -15,13 +15,14 @@ const shopRoutes = require('./routes/shop');
 const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use((req, res, next) => {  // It's just middleware for incoming requests
     User.findById("5c4d5022627ec50428b9ad7e")
         .then((user) => {
-            req.user = user;
+            const { name, email, cart, _id } = user;
+
+            req.user = new User(name, email, cart, _id);
             next();
         })
         .catch((err) => {
@@ -31,7 +32,6 @@ app.use((req, res, next) => {  // It's just middleware for incoming requests
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
-
 app.use(errorController.get404);
 
 mongoConnect(() => {
