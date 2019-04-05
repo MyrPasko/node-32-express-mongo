@@ -22,6 +22,7 @@ app.use((req, res, next) => {  // It's just middleware for incoming requests
         .then((user) => {
             const { name, email, cart, _id } = user;
 
+            console.log('[CART]', cart);
             req.user = new User(name, email, cart, _id);
             next();
         })
